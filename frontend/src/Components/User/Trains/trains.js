@@ -42,7 +42,7 @@ const TrainBooking = () => {
       navigate("/");
       return;
     }
-    fetch(`${import.meta.env.API_URL}/search-trains?from=${from}&to=${to}`)
+    fetch(`https://railway-reservation.onrender.com/search-trains?from=${from}&to=${to}`)
       .then((res) => res.json())
       .then((data) => {
         setTrains(data.trains)
