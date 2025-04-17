@@ -1,0 +1,285 @@
+.train-card,
+.passenger-form {
+  max-width: 700px !important;
+  margin: 20px auto !important;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px #00000040;
+  font-family: Arial, sans-serif;
+}
+
+.train-header {
+  display: flex;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.train-details {
+  padding: 15px 0;
+}
+
+.station-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  margin-right: auto;
+}
+
+.station .time {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.station .station-name {
+  font-size: 14px;
+  color: #555;
+}
+
+.station .date {
+  font-size: 12px;
+  color: #888;
+}
+
+.travel-duration {
+  font-size: 14px;
+  color: #666;
+}
+
+.class-info {
+  margin-top: 10px;
+  margin-right: auto;
+  display: flex;
+  gap: 10px;
+}
+
+.class-badge {
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+}
+
+
+.proceed-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.proceed-btn:hover {
+  background-color: #218838;
+}
+
+.demographic input,
+.demographic select {
+  margin-right: 10px !important;
+}
+
+@media (max-width: 768px) {
+  .passenger-form {
+    width: 85%;
+  }
+
+  .container-book {
+    padding: 10px;
+    text-align: center;
+  }
+
+  .title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  .train-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .train-card {
+    width: 90%;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 0.9rem;
+  }
+
+  .train-card h3 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+
+  .train-card p {
+    font-size: 0.85rem;
+  }
+
+  .schedule-btn {
+    font-size: 0.8rem;
+    padding: 5px 8px;
+  }
+
+  .seat-availability {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .seat-btn {
+    font-size: 0.85rem;
+    padding: 5px;
+    width: 100%;
+  }
+
+  .passenger-entry {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .demographic {
+    display: flex;
+    flex-direction: column;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .title {
+    font-size: 1rem;
+  }
+
+  .train-card {
+    padding: 8px;
+    font-size: 0.8rem;
+  }
+
+  .seat-btn {
+    font-size: 0.75rem;
+    padding: 4px;
+  }
+}
+
+
+.passenger-entry {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 5px;
+  width: 97%;
+}
+
+.passenger-entry input,
+.passenger-entry select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.passenger-entry input {
+  margin-right: 10px;
+}
+
+.passenger-entry .remove-button {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: fit-content;
+}
+
+.passenger-entry .remove-button:hover {
+  background: #c82333;
+}
+
+.passenger-entry select:hover,
+option:hover {
+  cursor: pointer;
+}
+
+.add-button {
+  display: block;
+  background: #28a745;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  float: left;
+  width: 120px;
+  margin-top: -5px;
+  margin-bottom: 30px;
+}
+
+.add-button:hover {
+  background: #218838;
+}
+
+.error-message-trn {
+  color: red;
+  font-size: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.error-message-trn-btn {
+  padding: 10px 20px;
+  display: block;
+  margin: 0 auto;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  border: none;
+}
+
+.error-container {
+  margin-top: 5px;
+  color: red;
+  font-size: 12px;
+}
+
+.input-error {
+  border: 1px solid red;
+}
+
+.error-text {
+  margin: 2px 0;
+}
+
+.submit-btn {
+  background: #007bff;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  margin-right: auto;
+  width: 100px;
+  border-radius: 5px;
+}
+
+.back-btn {
+  background: #f0f0f1;
+  width: 100px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.passenger-entry input:focus,
+.passenger-entry select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
+}

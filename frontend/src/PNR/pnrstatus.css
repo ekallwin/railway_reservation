@@ -1,0 +1,84 @@
+
+.pnr-container {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .pnr-heading {
+    margin-bottom: 20px;
+    font-size: 22px;
+    color: #333;
+  }
+  
+  .pnr-input {
+    width: 90%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    outline: none;
+    text-align: left;
+  }
+  
+  .pnr-button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s;
+  }
+  
+  .pnr-button:hover {
+    background-color: #0056b3;
+    cursor: pointer;
+  }
+  
+  .pnr-error {
+    color: red;
+    margin-top: 10px;
+  }
+  
+  .pnr-result-box {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    text-align: left;
+  }
+  
+  .pnr-sub-heading {
+    margin-bottom: 10px;
+    font-size: 18px;
+    border-bottom: 2px solid #007BFF;
+    display: inline-block;
+    padding-bottom: 5px;
+  }
+  
+  .pnr-passenger {
+    font-size: 16px;
+    font-weight: bold;
+    color: #444;
+  }
+  
+  @media (max-width: 600px) {
+    .pnr-container {
+      width: 80%;
+    }
+  
+    .pnr-input {
+      width: 100%;
+    }
+  }
+  

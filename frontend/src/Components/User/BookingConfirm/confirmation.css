@@ -1,0 +1,153 @@
+.confirmation-container {
+    max-width: 900px !important;
+    margin: 30px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+}
+
+.train-card-confirm,
+.passenger-section,
+.price-summary-card {
+    width: 90%;
+    max-width: 750px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    background: #fff;
+    box-shadow: 0 2px 8px #00000040;
+    margin-bottom: 20px;
+}
+
+.train-header-confirm {
+    font-size: 20px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: -40px;
+    text-align: center;
+    margin-top: -20px;
+}
+
+.station-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    margin-top: 10px;
+}
+
+.station {
+    flex: 1;
+    text-align: center;
+}
+
+.time {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.travel-duration {
+    font-size: 14px;
+    color: #555;
+}
+
+.train-status {
+    background: #e1e1e1;
+    padding: 10px;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.passenger-section h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.passenger-card,
+.fare-details {
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    font-size: 14px;
+    width: max-width;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.passenger-card strong {
+    font-size: 16px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.confirm-btn,
+.cancel-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+    transition: 0.3s;
+}
+
+.confirm-btn {
+    background: #27ae60;
+    color: #fff;
+}
+
+.confirm-btn:hover {
+    background: #218c53;
+}
+
+.cancel-btn {
+    background: #e74c3c;
+    color: #fff;
+}
+
+.cancel-btn:hover {
+    background: #c0392b;
+}
+
+.price-summary {
+    background: #f8f8f8;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 20px 0;
+    font-size: 16px;
+}
+
+.price-summary p {
+    margin: 5px 0;
+}
+
+.price-summary hr {
+    border: 0;
+    height: 1px;
+    background: #ddd;
+    margin: 10px 0;
+}
+
+.fare-details table tr {
+    height: 30px;
+}
+
+.fare-details table td {
+    padding-left: 15px;
+}
+
+.fare-details table th {
+    text-align: left;
+}

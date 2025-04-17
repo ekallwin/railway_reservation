@@ -1,0 +1,95 @@
+.container-history {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    text-align: left;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.loading,
+.error-book {
+    font-size: 25px;
+    color: red;
+    text-align: center;
+}
+
+.booking-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    margin: 10px 0px 10px 0px;
+
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    border: none !important;
+}
+
+th,
+td {
+    border: none !important;
+    padding: 8px;
+    text-align: left;
+}
+
+.cancel-btn,
+.print-btn {
+    background-color: #ff0000;
+    color: #ffffff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 15px;
+    margin-right: 20px;
+}
+
+.print-btn {
+    background-color: #008000;
+}
+
+.react-confirm-alert-body {
+    background: white !important;
+    color: black;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.react-confirm-alert-button-group button {
+    font-size: 14px !important;
+    padding: 10px 30px !important;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: #007BFF !important;
+    color: white !important;
+    transition: background-color 0.3s ease;
+    margin-right: 30px !important;
+}
+
+.react-confirm-alert-button-group button:hover {
+    background-color: #0056b3 !important;
+}
+
+.react-confirm-alert-overlay {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (max-width: 480px) {
+    .react-confirm-alert-body {
+        width: 80% !important;
+        padding: 15px !important;
+        margin: 0 auto;
+    }
+}

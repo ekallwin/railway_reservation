@@ -1,0 +1,186 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 300px;
+  margin: auto;
+}
+
+.input-box {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.swap-button {
+  display: flex;
+  justify-content: center;
+}
+
+.input-box,
+.input-box-quota,
+.date-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: white;
+  appearance: none;
+  box-sizing: border-box;
+}
+
+.swap-button button {
+  background: #f0f0f0;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.icon-container {
+  margin-top: -5px;
+  margin-bottom: -15px;
+}
+
+.swap-icon {
+  color: black;
+  transition: transform 0.5s ease;
+  padding: 3px;
+}
+
+.swap-icon:hover {
+  cursor: pointer;
+}
+
+.swap-icon:active {
+  transform: rotate(360deg);
+}
+
+.SandD {
+  font-size: 20px;
+  margin-bottom: -5px;
+  font-weight: 600;
+}
+
+.calendar-container {
+  position: relative;
+  display: inline-block;
+}
+
+.date-input {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.date-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
+}
+
+.input-box-quota:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
+}
+
+.calendar-popup {
+  position: absolute;
+  z-index: 10;
+  background: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 5px;
+  margin-top: -350px;
+  margin-left: -40px;
+  border: 1px solid #ccc;
+  max-width: 550px;
+  max-height: 550px;
+  transform: scale(0.75);
+}
+
+.search-button {
+  margin-top: 15px;
+}
+
+.calendar-popup .rdp {
+  font-size: 12px;
+}
+
+.calendar-popup .rdp-day {
+  width: 30px;
+  height: 30px;
+  font-size: 15px;
+  padding: 5px;
+}
+
+.calendar-popup .rdp-date {
+  font-size: 14px;
+}
+
+.calendar-popup .rdp-day.rdp-disabled:hover,
+.calendar-popup .rdp-day.rdp-disabled {
+  background-color: white;
+  border-radius: 0%;
+  color: gray;
+}
+
+.calendar-popup .rdp-day.rdp-selected {
+  background-color: #0062ff;
+  border-radius: 100%;
+  color: white;
+  border: none !important;
+  outline: none !important;
+}
+
+.calendar-popup .rdp-day:hover {
+  background-color: #0062ff;
+  border-radius: 100%;
+  color: white;
+}
+
+.calendar-popup .rdp-caption {
+  font-size: 18px;
+}
+
+.calendar-popup .rdp-nav {
+  width: 50px;
+  height: 50px;
+}
+
+
+
+
+@media (max-width: 768px) {
+
+  .calendar-popup {
+    position: absolute;
+    z-index: 10;
+    background: #fff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: -250px;
+    margin-left: -60px;
+  }
+
+  .container {
+    margin-top: 100px;
+  }
+
+  .book-grp {
+    margin-top: -10px !important;
+  }
+}
+
+.welcome-text {
+  font-size: 18px;
+  margin-bottom: -1px;
+  margin-top: -10px;
+}
