@@ -18,7 +18,7 @@ const TrainBookings = () => {
     }
 
     try {
-      const response = await fetch(`https://railway-reservation-backend-ekallwin.vercel.app/api/register-tte`, {
+      const response = await fetch(`https://railway-reservation.onrender.com/api/register-tte`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ const TrainBookings = () => {
     }
 
     try {
-      const response = await fetch(`https://railway-reservation-backend-ekallwin.vercel.app/api/delete-tte/${deleteTteId}`, {
+      const response = await fetch(`https://railway-reservation.onrender.com/api/delete-tte/${deleteTteId}`, {
         method: 'DELETE',
       });
       const data = await response.json();

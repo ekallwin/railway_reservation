@@ -49,7 +49,7 @@ const TrainBookings = () => {
     try {
 
       const response = await fetch(
-        `https://railway-reservation-backend-ekallwin.vercel.app/api/bookings/${trainNumber}?date=${formatDate(selectedDate)}`
+        `https://railway-reservation.onrender.com/api/bookings/${trainNumber}?date=${formatDate(selectedDate)}`
       );
       const data = await response.json();
 

@@ -17,7 +17,7 @@ const DeleteTrain = () => {
 
     setLoading(true);
     try {
-      const response = await fetch(`https://railway-reservation-backend-ekallwin.vercel.app/train/${searchTrainNumber}`);
+      const response = await fetch(`https://railway-reservation.onrender.com/train/${searchTrainNumber}`);
       const data = await response.json();
       if (response.ok) {
         setTrainData(data);
@@ -34,7 +34,7 @@ const DeleteTrain = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`https://railway-reservation-backend-ekallwin.vercel.app/update-train/${trainData.trainNumber}`, {
+      const response = await fetch(`https://railway-reservation.onrender.com/update-train/${trainData.trainNumber}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(trainData)
@@ -60,7 +60,7 @@ const DeleteTrain = () => {
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(`https://railway-reservation-backend-ekallwin.vercel.app/delete-train/${trainData.trainNumber}`, {
+      const response = await fetch(`https://railway-reservation.onrender.com/delete-train/${trainData.trainNumber}`, {
         method: 'DELETE',
       });
 

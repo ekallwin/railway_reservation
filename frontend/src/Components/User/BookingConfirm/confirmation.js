@@ -61,7 +61,7 @@ const Confirmation = () => {
 
 
         try {
-            const response = await fetch("https://railway-reservation-backend-ekallwin.vercel.app/book-ticket", {
+            const response = await fetch("https://railway-reservation.onrender.com/book-ticket", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(bookingData),

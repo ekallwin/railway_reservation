@@ -40,7 +40,7 @@ const Password = () => {
       return;
     }
 
-    fetch("https://railway-reservation-backend-ekallwin.vercel.app/update-password", {
+    fetch("https://railway-reservation.onrender.com/update-password", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

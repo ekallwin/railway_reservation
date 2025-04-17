@@ -217,7 +217,7 @@ const AddTrain = () => {
     };
 
     try {
-      const response = await fetch("https://railway-reservation-backend-ekallwin.vercel.app/add-train", {
+      const response = await fetch("https://railway-reservation.onrender.com/add-train", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
