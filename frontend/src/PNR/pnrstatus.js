@@ -44,7 +44,7 @@ const PNRStatus = () => {
         }
 
         try {
-            const response = await fetch(`http://localhost:8000/api/pnr-status/${pnr}`);
+            const response = await fetch(`https://railway-reservation-backend-ekallwin.vercel.app/api/pnr-status/${pnr}`);
             const data = await response.json();
 
             if (response.ok) {

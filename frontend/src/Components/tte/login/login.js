@@ -17,7 +17,7 @@ const TTELogin = ({ onLogin }) => {
         }
 
         try {
-            const response = await fetch(`http://localhost:8000/api/login-tte`, {
+            const response = await fetch(`https://railway-reservation-backend-ekallwin.vercel.app/api/login-tte`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

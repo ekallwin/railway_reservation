@@ -7,7 +7,7 @@ import '../admin.css';
 import { toast } from 'react-toastify';
 
 const Signup = () => {
-  const apiurl = "http://localhost:8000";
+  const apiurl = "https://railway-reservation-backend-ekallwin.vercel.app";
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({

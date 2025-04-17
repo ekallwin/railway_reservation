@@ -17,7 +17,7 @@ const TrainBooking = () => {
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     if (storedUser && storedUser.phone) {
-      fetch("https://railway-reservation-backend-ekallwin.vercel.app/get-user", {
+      fetch(`https://railway-reservation-backend-ekallwin.vercel.app/get-user`, {  // Corrected line
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone: storedUser.phone }),
@@ -42,7 +42,7 @@ const TrainBooking = () => {
       navigate("/");
       return;
     }
-    fetch(`https://railway-reservation-backend-ekallwin.vercel.app/search-trains?from=${from}&to=${to}`)
+    fetch(`${import.meta.env.API_URL}/search-trains?from=${from}&to=${to}`)
       .then((res) => res.json())
       .then((data) => {
         setTrains(data.trains)
@@ -53,7 +53,7 @@ const TrainBooking = () => {
 
   const fetchSeatAvailability = useCallback(async (trainNumber) => {
     try {
-      const res = await fetch(`https://railway-reservation-backend-ekallwin.vercel.app/train/${trainNumber}/${quota}?date=${date}`);
+      const res = await fetch(`${import.meta.env.API_URL}/train/${trainNumber}/${quota}?date=${date}`);
       const data = await res.json();
 
 
