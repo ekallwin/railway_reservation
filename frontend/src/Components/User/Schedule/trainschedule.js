@@ -10,7 +10,7 @@ const TrainSchedule = () => {
   useEffect(() => {
     const fetchSchedule = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/schedule/${trainNumber}`);
+        const response = await fetch(`https://railway-reservation-backend-ekallwin.vercel.app/api/schedule/${trainNumber}`);
         const data = await response.json();
         setSchedule(data);
       } catch (error) {

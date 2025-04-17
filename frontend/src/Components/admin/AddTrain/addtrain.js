@@ -217,7 +217,7 @@ const AddTrain = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:8000/add-train", {
+      const response = await fetch("https://railway-reservation-backend-ekallwin.vercel.app/add-train", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

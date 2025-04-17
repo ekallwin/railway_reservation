@@ -12,7 +12,7 @@ const TimetableSearch = () => {
   useEffect(() => {
     const fetchTrains = async () => {
       try {
-        const response = await fetch("http://localhost:8000/search-trains");
+        const response = await fetch("https://railway-reservation-backend-ekallwin.vercel.app/search-trains");
         const data = await response.json();
 
         if (Array.isArray(data)) {
@@ -65,7 +65,7 @@ const TimetableSearch = () => {
     setError("");
 
     try {
-      const response = await fetch(`http://localhost:8000/api/schedule/${trainNum}`);
+      const response = await fetch(`https://railway-reservation-backend-ekallwin.vercel.app/api/schedule/${trainNum}`);
       const data = await response.json();
 
       if (response.ok) {

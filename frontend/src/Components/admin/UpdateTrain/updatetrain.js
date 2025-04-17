@@ -47,7 +47,7 @@ const UpdateTrain = () => {
     setLoading(true);
     try {
 
-      const response = await fetch(`http://localhost:8000/train/${searchTrainNumber}`);
+      const response = await fetch(`https://railway-reservation-backend-ekallwin.vercel.app/train/${searchTrainNumber}`);
       const data = await response.json();
 
       if (response.ok) {
@@ -145,7 +145,7 @@ const UpdateTrain = () => {
     });
 
     try {
-      const response = await fetch(`http://localhost:8000/update-train/${trainData.trainNumber}`, {
+      const response = await fetch(`https://railway-reservation-backend-ekallwin.vercel.app/update-train/${trainData.trainNumber}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...trainData, seatAvailability: formattedSeatAvailability, runningDays })

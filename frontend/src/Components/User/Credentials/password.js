@@ -40,7 +40,7 @@ const Password = () => {
       return;
     }
 
-    fetch("http://localhost:8000/update-password", {
+    fetch("https://railway-reservation-backend-ekallwin.vercel.app/update-password", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

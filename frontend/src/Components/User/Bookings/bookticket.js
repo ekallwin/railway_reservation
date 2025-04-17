@@ -25,7 +25,7 @@ const TrainBooking = () => {
     const bookingData = JSON.parse(localStorage.getItem("bookingData"));
   
     if (storedUser && storedUser.phone) {
-      fetch("http://localhost:8000/get-user", {
+      fetch("https://railway-reservation-backend-ekallwin.vercel.app/get-user", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone: storedUser.phone }),

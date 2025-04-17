@@ -27,7 +27,7 @@ const BookingHistory = () => {
         }
 
         try {
-            const response = await fetch("http://localhost:8000/api/user-bookings", {
+            const response = await fetch("https://railway-reservation-backend-ekallwin.vercel.app/api/user-bookings", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -88,7 +88,7 @@ const BookingHistory = () => {
                     label: "Yes",
                     onClick: async () => {
                         try {
-                            const response = await fetch("http://localhost:8000/cancel-ticket", {
+                            const response = await fetch("https://railway-reservation-backend-ekallwin.vercel.app/cancel-ticket", {
                                 method: "POST",
                                 headers: { "Content-Type": "application/json" },
                                 body: JSON.stringify({ pnrNumber: pnr })
