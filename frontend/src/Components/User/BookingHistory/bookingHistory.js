@@ -6,7 +6,8 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Print from '../printTemplate'
+import Print from '../printTemplate';
+import html2pdf from "html2pdf.js";
 
 const BookingHistory = () => {
     const [bookings, setBookings] = useState([]);
@@ -120,14 +121,24 @@ const BookingHistory = () => {
     };
     const downloadTicket = (booking) => {
         const ticketHTML = Print(booking);
-        const blob = new Blob([ticketHTML], { type: "text/html" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `Ticket_${booking.pnrNumber}.html`;
-        a.click();
-        URL.revokeObjectURL(url);
+    
+        const opt = {
+            margin:       0.5,
+            filename:     `Ticket_${booking.pnrNumber}.pdf`,
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2 },
+            jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+        };
+    
+        const container = document.createElement("div");
+        container.innerHTML = ticketHTML;
+        document.body.appendChild(container); // Add to DOM temporarily for rendering
+    
+        html2pdf().set(opt).from(container).save().then(() => {
+            document.body.removeChild(container); // Clean up
+        });
     };
+    
     
 
 
