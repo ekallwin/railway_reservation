@@ -105,6 +105,9 @@ const Signin = () => {
         <ul className={`navbar-links ${isOpen ? "open" : ""}`}>
           <li><Link to="/" className="navbar-link">Home</Link></li>
           <li><Link to="/pnr" className="navbar-link">PNR Status</Link></li>
+          <li>
+            <Link to="/timetable" className="navbar-link">Train Schedule</Link>
+          </li>
         </ul>
       </nav>
 
