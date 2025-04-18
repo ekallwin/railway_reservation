@@ -4,13 +4,15 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 
 const app = express();
-app.use(cors(
-  {
-      origin: ["https://railway-reservation-frontend.onrender.com"],
-      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-      credentials: true
-  }
-));
+app.use(cors({
+  origin: [
+    "https://railway-reservation-frontend.onrender.com",
+    "http://localhost:3000"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  credentials: true
+}));
+
 app.use(express.json())
 
 const PORT = process.env.PORT || 8000;

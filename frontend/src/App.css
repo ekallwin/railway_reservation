@@ -235,3 +235,8 @@ nav {
 .stn-inp:focus {
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
+
+.other-link a{
+  text-decoration: none;
+  color: #007bff;
+}

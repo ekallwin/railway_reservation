@@ -83,7 +83,9 @@ const Signup = () => {
             toast.error(data.message);
           }
         })
-        .catch(() => toast.error("Network error, please try again."))
+        .catch(() => {
+          toast.error("Network error, please try again.");
+        })
         .finally(() => setLoading(false));
     }
   };
@@ -185,7 +187,9 @@ const Signup = () => {
             />
           </div>
 
-          <button type="submit" className='button'>Sign Up</button>
+          <button type="submit" className='button' disabled={loading}>
+            {loading ? "Signing up..." : 'Sign Up'}
+            </button>
 
           <p style={{ textAlign: 'center' }}>
             Already have an account? <Link to="/login">Login</Link>

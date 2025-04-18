@@ -17,6 +17,11 @@ const Footer = () => {
             Allwin E K
           </a>
         </p>
+        <div style={{ display: 'flex', gap: '20px' }} className="other-link">
+          <a href="/tte">TTE Portal</a>
+          <a href="/admin">Admin Portal</a>
+        </div>
+
       </div>
     </footer>
   );
