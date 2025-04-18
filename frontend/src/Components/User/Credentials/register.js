@@ -128,6 +128,9 @@ const Signup = () => {
           <li>
             <Link to="/pnr-status" className="navbar-link">PNR Status</Link>
           </li>
+          <li>
+            <Link to="/timetable" className="navbar-link">Train Schedule</Link>
+          </li>
         </ul>
       </nav>
 
