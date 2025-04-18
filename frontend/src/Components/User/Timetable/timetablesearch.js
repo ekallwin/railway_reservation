@@ -154,7 +154,7 @@ const TimetableSearch = () => {
           <div style={{ marginTop: "20px", textAlign: "left", maxWidth: "600px", margin: "auto" }}>
             <h3>{schedule.trainName} ({schedule.trainNumber})</h3>
 
-            <table border="1" cellPadding="8" style={{ width: "100%", borderCollapse: "collapse", marginBottom: '20px' }} className="schedule-table">
+            <table border="1" cellPadding="8" style={{ marginBottom: '20px' }} className="schedule-table">
               <thead>
                 <tr>
                   <th>Station</th>
