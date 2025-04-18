@@ -118,6 +118,17 @@ const BookingHistory = () => {
         printWindow.document.write(printContent);
         printWindow.document.close();
     };
+    const downloadTicket = (booking) => {
+        const ticketHTML = Print(booking);
+        const blob = new Blob([ticketHTML], { type: "text/html" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `Ticket_${booking.pnrNumber}.html`;
+        a.click();
+        URL.revokeObjectURL(url);
+    };
+    
 
 
     return (
@@ -162,12 +173,20 @@ const BookingHistory = () => {
                                     </button>
                                 )}
                                 {booking.status !== "Cancelled" && booking.status !== "Completed" && (
+                                    <div>
                                     <button
                                         className="print-btn"
                                         onClick={() => printTicket(booking)}
                                     >
                                         Print Ticket
                                     </button>
+                                    <button
+                                    className="print-btn"
+                                    onClick={() => downloadTicket(booking)}
+                                >
+                                    Download Ticket
+                                </button>
+                                </div>
                                 )}
                             </div>
                         ))}

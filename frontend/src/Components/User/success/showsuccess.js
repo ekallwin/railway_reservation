@@ -63,6 +63,16 @@ const Success = () => {
         printWindow.document.write(printContent);
         printWindow.document.close();
     };
+    const downloadTicket = (booking) => {
+        const ticketHTML = Print(booking);
+        const blob = new Blob([ticketHTML], { type: "text/html" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `Ticket_${booking.pnrNumber}.html`;
+        a.click();
+        URL.revokeObjectURL(url);
+    };
 
 
     return (
@@ -93,7 +103,7 @@ const Success = () => {
 
                     <div className="passenger-list">
                         <h3>Passenger Details</h3>
-                        <table style={{ width: '50%', borderCollapse: 'collapse', marginTop: '10px' }}>
+                        <table style={{ width: '70%', borderCollapse: 'collapse', marginTop: '10px' }}>
                             <thead>
                                 <tr>
                                     <th>Passenger</th>
@@ -154,6 +164,25 @@ const Success = () => {
                     passengers
                 })}>
                     Print
+                </button>
+                <button className="success-btn" onClick={() => downloadTicket({
+                    pnrNumber,
+                    trainNumber,
+                    trainName,
+                    journeyDate,
+                    source: departureStation,
+                    sourceDeparture: departureTime,
+                    destination: arrivalStation,
+                    destinationArrival: arrivalTime,
+                    formattedArrivalDate: arrivalDate,
+                    selectedClass,
+                    duration,
+                    distance,
+                    quota,
+                    totalFare: parseFloat(totalFare),
+                    passengers
+                })}>
+                    Download Ticket
                 </button>
 
             </div>
