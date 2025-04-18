@@ -44,51 +44,53 @@ const Signup = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    let isValid = true;
-    const newErrors = {};
+  e.preventDefault();
+  let isValid = true;
+  const newErrors = {};
 
-    if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
-      isValid = false;
-    }
-    if (!formData.phone.trim() || !phoneRegex.test(formData.phone.trim())) {
-      newErrors.phone = "Invalid phone number";
-      isValid = false;
-    }
-    if (!formData.email.trim() || !emailRegex.test(formData.email.trim())) {
-      newErrors.email = "Invalid email address";
-      isValid = false;
-    }
-    if (!formData.password.trim() || formData.password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters";
-      isValid = false;
-    }
+  if (!formData.name.trim()) {
+    newErrors.name = "Name is required";
+    isValid = false;
+  }
+  if (!formData.phone.trim() || !phoneRegex.test(formData.phone.trim())) {
+    newErrors.phone = "Invalid phone number";
+    isValid = false;
+  }
+  if (!formData.email.trim() || !emailRegex.test(formData.email.trim())) {
+    newErrors.email = "Invalid email address";
+    isValid = false;
+  }
+  if (!formData.password.trim() || formData.password.length < 6) {
+    newErrors.password = "Password must be at least 6 characters";
+    isValid = false;
+  }
 
-    setErrors(newErrors);
+  setErrors(newErrors);
 
-    if (isValid) {
-      fetch(apiurl + "/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+  if (isValid) {
+    setLoading(true); // <--- FIX: Add this line to show the loader
+
+    fetch(apiurl + "/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    })
+      .then(async (res) => {
+        const data = await res.json();
+        if (res.status === 201) {
+          toast.success(data.message);
+          setFormData({ name: "", phone: "", email: "", password: "" });
+          setTimeout(() => navigate("/login"), 1500);
+        } else {
+          toast.error(data.message);
+        }
       })
-        .then(async (res) => {
-          const data = await res.json();
-          if (res.status === 201) {
-            toast.success(data.message);
-            setFormData({ name: "", phone: "", email: "", password: "" });
-            setTimeout(() => navigate("/login"), 1500);
-          } else {
-            toast.error(data.message);
-          }
-        })
-        .catch(() => {
-          toast.error("Network error, please try again.");
-        })
-        .finally(() => setLoading(false));
-    }
-  };
+      .catch(() => {
+        toast.error("Network error, please try again.");
+      })
+      .finally(() => setLoading(false));
+  }
+};
 
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => {
