@@ -47,6 +47,9 @@ const HomePage = () => {
           <li>
             <Link to="/pnr" className="navbar-link">PNR Status</Link>
           </li>
+          <li>
+            <Link to="/timetable" className="navbar-link">Train Schedule</Link>
+          </li>
         </ul>
       </nav>
 
