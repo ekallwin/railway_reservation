@@ -53,7 +53,7 @@ const TrainBooking = () => {
 
   const fetchSeatAvailability = useCallback(async (trainNumber) => {
     try {
-      const res = await fetch(`${import.meta.env.API_URL}/train/${trainNumber}/${quota}?date=${date}`);
+      const res = await fetch(`https://railway-reservation.onrender.com/train/${trainNumber}/${quota}?date=${date}`);
       const data = await res.json();
 
 
