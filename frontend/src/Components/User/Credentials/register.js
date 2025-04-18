@@ -3,12 +3,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash, faCircleExclamation, faX, faBars } from "@fortawesome/free-solid-svg-icons";
 import Flag from '../Image/flag.png';
+import Loader from '../loader/loader';
 import '../user.css';
 import { toast } from 'react-toastify';
 
 const Signup = () => {
   const apiurl = "https://railway-reservation.onrender.com";
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
 
   const [formData, setFormData] = useState({
     name: "",
@@ -80,7 +83,8 @@ const Signup = () => {
             toast.error(data.message);
           }
         })
-        .catch(() => toast.error("Network error, please try again."));
+        .catch(() => toast.error("Network error, please try again."))
+        .finally(() => setLoading(false));
     }
   };
 
@@ -104,6 +108,7 @@ const Signup = () => {
 
   return (
     <>
+    {loading && <Loader />}
       <nav className="navbar">
         <div className="navbar-logo">Train Booking</div>
         <div className="menu-icon" onClick={toggleMenu}>
@@ -181,6 +186,7 @@ const Signup = () => {
           </div>
 
           <button type="submit" className='button'>Sign Up</button>
+
           <p style={{ textAlign: 'center' }}>
             Already have an account? <Link to="/login">Login</Link>
           </p>

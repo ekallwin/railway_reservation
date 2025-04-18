@@ -61,7 +61,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          {/* <Route path="*" element={<Navigate to="/" />} /> */}
+          <Route path="*" element={<Navigate to="/" />} />
           <Route path="/" element={<Home />} />
           <Route path="/pnr" element={<PNRhome />} />
           <Route path="/pnr-status" element={<PNR />} />

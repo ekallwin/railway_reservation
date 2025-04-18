@@ -7,7 +7,7 @@ const app = express();
 app.use(cors(
   {
       origin: ["https://railway-reservation-frontend.onrender.com"],
-      methods: ["POST", "GET"],
+      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
       credentials: true
   }
 ));
