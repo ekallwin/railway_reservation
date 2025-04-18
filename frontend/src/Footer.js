@@ -18,8 +18,8 @@ const Footer = () => {
           </a>
         </p>
         <div style={{ display: 'flex', gap: '20px' }} className="other-link">
-          <a href="/tte">TTE Portal</a>
-          <a href="/admin">Admin Portal</a>
+          <Link to="/tte">TTE Portal</Link> 
+          <Link to="/admin">Admin Portal</Link>
         </div>
 
       </div>
