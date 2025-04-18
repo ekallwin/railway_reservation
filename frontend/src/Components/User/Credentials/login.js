@@ -53,14 +53,9 @@ const Signin = () => {
       setLoading(true);
       fetch(apiUrl + "/login", {
         method: "POST",
-        headers: { "Content-Type": "application/json" }
-
-      },
-        {
-          body: JSON.stringify(formData),
-          credentials: "include"
-        }
-      )
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      })
         .then(res => res.json())
         .then(data => {
           if (data.message === "No user found") {
@@ -178,7 +173,7 @@ const Signin = () => {
           </div>
 
           <button type="submit" className='button' disabled={loading}>
-            {loading ? "Logging in..." : "Login"}
+            {loading ? "Logging in..."  : "Login"}
           </button>
 
           <p style={{ textAlign: 'center' }}>
