@@ -7,6 +7,7 @@ import './trains.css';
 import moment from 'moment-timezone';
 
 const TrainBooking = () => {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
   const location = useLocation();
   const { from, to, date, quota } = location.state || {};
@@ -17,7 +18,7 @@ const TrainBooking = () => {
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     if (storedUser && storedUser.phone) {
-      fetch("https://railway-reservation.onrender.com/get-user", {
+      fetch(`${apiUrl}/get-user`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone: storedUser.phone }),
@@ -35,25 +36,26 @@ const TrainBooking = () => {
     } else {
       navigate("/login");
     }
-  }, [navigate]);
+  }, [navigate, apiUrl]);
 
   useEffect(() => {
     if (!from || !to) {
       navigate("/");
       return;
     }
-    fetch(`https://railway-reservation.onrender.com/search-trains?from=${from}&to=${to}`)
+    fetch(`${apiUrl}/search-trains?from=${from}&to=${to}`)
       .then((res) => res.json())
       .then((data) => {
         setTrains(data.trains)
       })
       .catch((error) => console.error("Error fetching trains:", error));
 
-  }, [from, to, navigate]);
+  }, [from, to, navigate, apiUrl]);
+
 
   const fetchSeatAvailability = useCallback(async (trainNumber) => {
     try {
-      const res = await fetch(`https://railway-reservation.onrender.com/train/${trainNumber}/${quota}?date=${date}`);
+      const res = await fetch(`${apiUrl}/train/${trainNumber}/${quota}?date=${date}`);
       const data = await res.json();
 
 
@@ -69,7 +71,8 @@ const TrainBooking = () => {
     } catch (error) {
       console.error("Error fetching seat availability:", error);
     }
-  }, [quota, date]);
+  }, [quota, date, apiUrl]);
+
 
 
   useEffect(() => {

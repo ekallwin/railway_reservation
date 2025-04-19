@@ -4,6 +4,7 @@ import '../user.css';
 import Flag from '../Image/flag.png'
 import Navbar from '../Navbar/navbar';
 const Profile = () => {
+    const apiUrl = process.env.REACT_APP_API_URL;
     const navigate = useNavigate();
     const [user, setUser] = useState({ name: "", phone: "", email: "" });
 
@@ -11,7 +12,7 @@ const Profile = () => {
         const storedUser = JSON.parse(localStorage.getItem("user"));
 
         if (storedUser && storedUser.phone) {
-            fetch("https://railway-reservation.onrender.com/get-user", {
+            fetch(`${apiUrl}/get-user`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ phone: storedUser.phone }),
@@ -33,7 +34,7 @@ const Profile = () => {
         } else {
             navigate("/login");
         }
-    }, [navigate]);
+    }, [navigate, apiUrl]);
 
     const handleLogout = () => {
         localStorage.clear();

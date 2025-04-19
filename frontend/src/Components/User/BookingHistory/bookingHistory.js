@@ -10,6 +10,7 @@ import Print from '../printTemplate';
 import html2pdf from "html2pdf.js";
 
 const BookingHistory = () => {
+    const apiUrl = process.env.REACT_APP_API_URL;
     const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
@@ -17,7 +18,7 @@ const BookingHistory = () => {
         return moment().tz("Asia/Kolkata").toDate();
     };
 
-    const fetchBookings = async () => {
+    const fetchBookings = useCallback(async () => {
         const storedUser = JSON.parse(localStorage.getItem("user"));
         const userPhone = storedUser?.phone;
 
@@ -28,7 +29,7 @@ const BookingHistory = () => {
         }
 
         try {
-            const response = await fetch("https://railway-reservation.onrender.com/api/user-bookings", {
+            const response = await fetch(`${apiUrl}/api/user-bookings`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -44,7 +45,7 @@ const BookingHistory = () => {
         } finally {
             setLoading(false);
         }
-    };
+    }, [apiUrl]); 
 
 
     const updateBookingStatus = useCallback(() => {
@@ -78,7 +79,7 @@ const BookingHistory = () => {
 
     useEffect(() => {
         fetchBookings();
-    }, []);
+    }, [fetchBookings]);
 
     const handleCancelBooking = async (pnr) => {
         confirmAlert({
@@ -89,7 +90,7 @@ const BookingHistory = () => {
                     label: "Yes",
                     onClick: async () => {
                         try {
-                            const response = await fetch("https://railway-reservation.onrender.com/cancel-ticket", {
+                            const response = await fetch(`${apiUrl}/cancel-ticket`, {
                                 method: "POST",
                                 headers: { "Content-Type": "application/json" },
                                 body: JSON.stringify({ pnrNumber: pnr })
@@ -121,25 +122,25 @@ const BookingHistory = () => {
     };
     const downloadTicket = (booking) => {
         const ticketHTML = Print(booking);
-    
+
         const opt = {
-            margin:       0.5,
-            filename:     `Ticket_${booking.pnrNumber}.pdf`,
-            image:        { type: 'jpeg', quality: 0.98 },
-            html2canvas:  { scale: 2 },
-            jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+            margin: 0.5,
+            filename: `Ticket_${booking.pnrNumber}.pdf`,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
         };
-    
+
         const container = document.createElement("div");
         container.innerHTML = ticketHTML;
         document.body.appendChild(container); // Add to DOM temporarily for rendering
-    
+
         html2pdf().set(opt).from(container).save().then(() => {
             document.body.removeChild(container); // Clean up
         });
     };
-    
-    
+
+
 
 
     return (
@@ -185,19 +186,19 @@ const BookingHistory = () => {
                                 )}
                                 {booking.status !== "Cancelled" && booking.status !== "Completed" && (
                                     <div>
-                                    <button
-                                        className="print-btn"
-                                        onClick={() => printTicket(booking)}
-                                    >
-                                        Print Ticket
-                                    </button>
-                                    <button
-                                    className="print-btn"
-                                    onClick={() => downloadTicket(booking)}
-                                >
-                                    Download Ticket
-                                </button>
-                                </div>
+                                        <button
+                                            className="print-btn"
+                                            onClick={() => printTicket(booking)}
+                                        >
+                                            Print Ticket
+                                        </button>
+                                        <button
+                                            className="print-btn"
+                                            onClick={() => downloadTicket(booking)}
+                                        >
+                                            Download Ticket
+                                        </button>
+                                    </div>
                                 )}
                             </div>
                         ))}

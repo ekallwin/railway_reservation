@@ -8,7 +8,7 @@ import '../user.css';
 import { toast } from 'react-toastify';
 
 const Signup = () => {
-  const apiurl = "https://railway-reservation.onrender.com";
+  const apiurl = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -68,7 +68,7 @@ const Signup = () => {
   setErrors(newErrors);
 
   if (isValid) {
-    setLoading(true); // <--- FIX: Add this line to show the loader
+    setLoading(true); 
 
     fetch(apiurl + "/register", {
       method: "POST",

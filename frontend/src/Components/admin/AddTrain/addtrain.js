@@ -6,6 +6,7 @@ import '../trains.css';
 import Navbar from '../Nav/navbar'
 
 const AddTrain = () => {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const [trainNumber, setTrainNumber] = useState('');
   const [trainName, setTrainName] = useState('');
   const [departureTime, setDepartureTime] = useState('');
@@ -217,7 +218,7 @@ const AddTrain = () => {
     };
 
     try {
-      const response = await fetch("https://railway-reservation.onrender.com/add-train", {
+      const response = await fetch(`${apiUrl}/add-train`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -11,14 +11,12 @@ const Success = () => {
 
 
     useEffect(() => {
-        // Scroll to top and clear localStorage
         setTimeout(() => {
             document.documentElement.scrollTop = 0;
             document.body.scrollTop = 0;
         }, 100);
         localStorage.removeItem("passengerData");
 
-        // Push a new history state to trap the back button
         window.history.pushState(null, "", window.location.href);
 
         const handlePopState = () => {
@@ -66,24 +64,24 @@ const Success = () => {
     };
     const downloadTicket = (booking) => {
         const ticketHTML = Print(booking);
-    
+
         const opt = {
-            margin:       0.5,
-            filename:     `Ticket_${booking.pnrNumber}.pdf`,
-            image:        { type: 'jpeg', quality: 0.98 },
-            html2canvas:  { scale: 2 },
-            jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+            margin: 0.5,
+            filename: `Ticket_${booking.pnrNumber}.pdf`,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
         };
-    
+
         const container = document.createElement("div");
         container.innerHTML = ticketHTML;
-        document.body.appendChild(container); // Add to DOM temporarily for rendering
-    
+        document.body.appendChild(container);
+
         html2pdf().set(opt).from(container).save().then(() => {
-            document.body.removeChild(container); // Clean up
+            document.body.removeChild(container);
         });
     };
-    
+
 
 
     return (

@@ -25,7 +25,6 @@ const TrainPreview = () => {
         newPassengers[index] = { ...newPassengers[index], [name]: value };
         setPassengers(newPassengers);
 
-        // Remove the specific field error when the user types
         setErrors((prevErrors) => {
             if (prevErrors[index]) {
                 const updatedErrors = { ...prevErrors };

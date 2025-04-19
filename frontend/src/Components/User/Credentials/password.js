@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import Navbar from "../Navbar/navbar";
 
 const Password = () => {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
   const [passwordData, setPasswordData] = useState({
     currentPassword: "",
@@ -40,7 +41,7 @@ const Password = () => {
       return;
     }
 
-    fetch("https://railway-reservation.onrender.com/update-password", {
+    fetch(`${apiUrl}/update-password`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

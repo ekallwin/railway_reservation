@@ -6,6 +6,7 @@ import '../trains.css';
 import Navbar from '../Nav/navbar';
 
 const UpdateTrain = () => {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const [searchTrainNumber, setSearchTrainNumber] = useState('');
   const [trainData, setTrainData] = useState(null);
   const [availableClasses, setAvailableClasses] = useState([]);
@@ -47,7 +48,7 @@ const UpdateTrain = () => {
     setLoading(true);
     try {
 
-      const response = await fetch(`https://railway-reservation.onrender.com/train/${searchTrainNumber}`);
+      const response = await fetch(`${apiUrl}/train/${searchTrainNumber}`);
       const data = await response.json();
 
       if (response.ok) {
@@ -145,7 +146,7 @@ const UpdateTrain = () => {
     });
 
     try {
-      const response = await fetch(`https://railway-reservation.onrender.com/update-train/${trainData.trainNumber}`, {
+      const response = await fetch(`${apiUrl}/update-train/${trainData.trainNumber}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...trainData, seatAvailability: formattedSeatAvailability, runningDays })

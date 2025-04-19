@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './login.css';
 const TTELogin = ({ onLogin }) => {
+    const apiUrl = process.env.REACT_APP_API_URL;
     const [tteId, setTteId] = useState("");
     const [ttePassword, setTtePassword] = useState("");
     const [error, setError] = useState("");
@@ -17,7 +18,7 @@ const TTELogin = ({ onLogin }) => {
         }
 
         try {
-            const response = await fetch(`https://railway-reservation.onrender.com/api/login-tte`, {
+            const response = await fetch(`${apiUrl}/api/login-tte`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -28,7 +29,7 @@ const TTELogin = ({ onLogin }) => {
 
             if (response.ok) {
                 console.log("Login successful, redirecting...");
-                onLogin(); 
+                onLogin();
                 navigate('/tte/view-tickets');
             } else {
                 setError(data.message || "Login failed.");

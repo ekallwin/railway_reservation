@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import './trainschedule.css';
 
 const TrainSchedule = () => {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const { trainNumber } = useParams();
   const navigate = useNavigate();
   const [schedule, setSchedule] = useState(null);
@@ -10,7 +11,7 @@ const TrainSchedule = () => {
   useEffect(() => {
     const fetchSchedule = async () => {
       try {
-        const response = await fetch(`https://railway-reservation.onrender.com/api/schedule/${trainNumber}`);
+        const response = await fetch(`${apiUrl}/api/schedule/${trainNumber}`);
         const data = await response.json();
         setSchedule(data);
       } catch (error) {
@@ -19,7 +20,7 @@ const TrainSchedule = () => {
     };
 
     fetchSchedule();
-  }, [trainNumber]);
+  }, [trainNumber, apiUrl]);
 
   if (!schedule) return <p className="loading">Loading schedule...</p>;
 

@@ -4,24 +4,23 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 
 const app = express();
+const allowedOrigins = process.env.ALLOWED_ORIGINS
+  ? process.env.ALLOWED_ORIGINS.split(',')
+  : ['http://localhost:3000'];
 app.use(cors({
-  origin: [
-    "https://railway-reservation-frontend.onrender.com",
-    "http://localhost:3000"
-  ],
+  origin: allowedOrigins,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true
 }));
 
-app.use(express.json())
+app.use(express.json());
 
 const PORT = process.env.PORT || 8000;
-
 
 const bcrypt = require("bcrypt");
 
 app.use(cors());
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 
 require('dotenv').config();
 
@@ -180,17 +179,28 @@ app.post("/register-admin", async (req, res) => {
 });
 
 app.post("/login-admin", async (req, res) => {
-  const { adminPhone, adminPassword } = req.body;
-
   try {
+    const { adminPhone, adminPassword } = req.body;
     const admin = await Admin.findOne({ adminPhone });
+
     if (!admin) {
       return res.status(400).json({ message: "No admin found" });
     }
+
     if (admin.adminPassword !== adminPassword) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
-    res.status(200).json({ message: "Admin login successful", admin });
+
+    // Return all necessary admin data
+    res.status(200).json({
+      message: "Admin login successful",
+      admin: {
+        _id: admin._id,
+        adminName: admin.adminName,
+        adminPhone: admin.adminPhone,
+        adminEmail: admin.adminEmail
+      }
+    });
   } catch (error) {
     res.status(500).json({ message: "Server error", error });
   }

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash, faCircleExclamation, } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEyeSlash, faCircleExclamation, faX, faBars } from "@fortawesome/free-solid-svg-icons";
 import Flag from '../Image/flag.png';
 import '../admin.css';
 import { toast } from 'react-toastify';
+import Loader from '../../User/loader/loader';
 
 const Signup = () => {
   const apiurl = "https://railway-reservation.onrender.com";
@@ -19,6 +20,7 @@ const Signup = () => {
 
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const phoneRegex = /^(?!([0-9])\1{9})[6-9]\d{9}$/;
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|in|org|edu\.in|net|co\.in)$/;
@@ -65,6 +67,7 @@ const Signup = () => {
     setErrors(newErrors);
 
     if (isValid) {
+      setLoading(true);
       fetch(apiurl + "/register-admin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -80,7 +83,8 @@ const Signup = () => {
             toast.error(data.message);
           }
         })
-        .catch(() => toast.error("Network error, please try again."));
+        .catch(() => toast.error("Network error, please try again."))
+        .finally(() => setLoading(false));
     }
   };
 
@@ -104,15 +108,22 @@ const Signup = () => {
 
   return (
     <>
+      {loading && <Loader />}
       <nav className="navbar">
         <div className="navbar-logo">Train Booking</div>
         <div className="menu-icon" onClick={toggleMenu}>
-          {/* {isOpen ? (
-          <FontAwesomeIcon icon={faX} className="menu-icon-close" size="2xl" />
-        ) : (
-          <FontAwesomeIcon icon={faBars} className="menu-icon-bars" size="2xl" />
-        )} */}
+          {isOpen ? (
+            <FontAwesomeIcon icon={faX} className="menu-icon-close" size="2xl" />
+          ) : (
+            <FontAwesomeIcon icon={faBars} className="menu-icon-bars" size="2xl" />
+          )}
         </div>
+        <ul className={`navbar-links ${isOpen ? "open" : ""}`}>
+          <li>
+            <Link to="/" className="navbar-link">Home</Link>
+          </li>
+
+        </ul>
       </nav>
 
       <div className="container">
@@ -141,7 +152,7 @@ const Signup = () => {
           <div className="input-container">
             <input
               type={showPassword ? 'text' : 'password'}
-              name="password"
+              name="adminPassword"
               value={formData.adminPassword}
               onChange={handleChange}
               placeholder=" "
@@ -150,14 +161,12 @@ const Signup = () => {
             <label>Create admin Password</label>
             {errors.adminPassword && <div className="error-message"><FontAwesomeIcon icon={faCircleExclamation} style={{ color: 'red' }} /> {errors.adminPassword}</div>}
 
-            {/* Show/Hide Password Icon */}
             <FontAwesomeIcon
               icon={showPassword ? faEye : faEyeSlash}
               className="password-toggle-icon"
               onClick={() => setShowPassword(!showPassword)}
             />
           </div>
-
 
           <button type="submit" className='button'>Sign Up</button>
           <p style={{ textAlign: 'center' }}>Already have an account? <Link to="/admin">Login</Link></p>

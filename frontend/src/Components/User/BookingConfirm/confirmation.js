@@ -4,6 +4,7 @@ import Navbar from "../Navbar/navbar";
 import './confirmation.css';
 import FareBreakdown from "../Farepopup/farebreakdown";
 const Confirmation = () => {
+    const apiUrl = process.env.REACT_APP_API_URL;
     useEffect(() => {
         setTimeout(() => {
             document.documentElement.scrollTop = 0;
@@ -61,7 +62,7 @@ const Confirmation = () => {
 
 
         try {
-            const response = await fetch("https://railway-reservation.onrender.com/book-ticket", {
+            const response = await fetch(`${apiUrl}book-ticket`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(bookingData),

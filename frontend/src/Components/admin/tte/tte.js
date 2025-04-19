@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Bounce } from 'react-toastify';
 const TrainBookings = () => {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const [registerTteId, setRegisterTteId] = useState("");
   const [registerTtePassword, setRegisterTtePassword] = useState("");
   const [deleteTteId, setDeleteTteId] = useState("");
@@ -18,7 +19,7 @@ const TrainBookings = () => {
     }
 
     try {
-      const response = await fetch(`https://railway-reservation.onrender.com/api/register-tte`, {
+      const response = await fetch(`${apiUrl}/api/register-tte`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -49,7 +50,7 @@ const TrainBookings = () => {
     }
 
     try {
-      const response = await fetch(`https://railway-reservation.onrender.com/api/delete-tte/${deleteTteId}`, {
+      const response = await fetch(`${apiUrl}/api/delete-tte/${deleteTteId}`, {
         method: 'DELETE',
       });
       const data = await response.json();

@@ -8,7 +8,8 @@ import Flag from '../Image/flag.png';
 import Loader from '../loader/loader';
 
 const Signin = () => {
-  const apiUrl = "https://railway-reservation.onrender.com";
+  const apiUrl = process.env.REACT_APP_API_URL;
+
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -65,7 +66,7 @@ const Signin = () => {
           } else {
             toast.success("Login success");
             localStorage.setItem("user", JSON.stringify(data.user));
-            setTimeout(() => navigate("/booking"), 100);
+            setTimeout(() => navigate("/booking"));
           }
         })
         .catch(error => {

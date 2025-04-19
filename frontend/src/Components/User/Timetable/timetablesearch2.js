@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Navbar from '../Navbar/navbar';
+import Navbar from '../Navbar/navbar2';
 import "./timetablesearch.css";
 const TimetableSearch = () => {
   const apiUrl = process.env.REACT_APP_API_URL;
@@ -66,7 +66,7 @@ const TimetableSearch = () => {
     setError("");
 
     try {
-      const response = await fetch(`https://railway-reservation.onrender.com/api/schedule/${trainNum}`);
+      const response = await fetch(`${apiUrl}/api/schedule/${trainNum}`);
       const data = await response.json();
 
       if (response.ok) {

@@ -13,17 +13,20 @@ import Profile from './Components/User/Profile/profile';
 import Password from './Components/User/Credentials/password';
 import TrainSearch from './Components/User/Trains/trains'
 import TrainSchedule from './Components/User/Schedule/trainschedule';
-import Timetable from './Components/User/Timetable/timetablesearch';
+import TimetableUser from './Components/User/Timetable/timetablesearch';
+import Timetable from './Components/User/Timetable/timetablesearch2';
 import TrainPreview from './Components/User/TrainPev/trainpreview';
 import Confirm from './Components/User/BookingConfirm/confirmation';
 import Success from './Components/User/success/showsuccess';
 import Bookings from './Components/User/BookingHistory/bookingHistory';
+
 import AdminRegister from './Components/admin/Credentials/register';
 import AdminLogin from './Components/admin/Credentials/login';
 import Dashboard from './Components/admin/Dasboardmenu/dashboard';
 import AddTrain from './Components/admin/AddTrain/addtrain';
 import UpdateTrain from './Components/admin/UpdateTrain/updatetrain';
 import DeleteTrain from './Components/admin/DeleteTrain/deletetrain';
+
 import TTE from './Components/admin/tte/tte';
 import Tickets from './Components/tte/Bookings/allbookings';
 import TTELogin from './Components/tte/login/login';
@@ -31,9 +34,25 @@ import TTEprotect from './Components/tte/ProtectedRoute'
 import { Bounce } from 'react-toastify';
 function App() {
 
-  const ProtectedRouteAdmin = ({ children }) => {
-    const isAuthenticated = sessionStorage.getItem("userId");
-    return isAuthenticated ? children : <Navigate to="/admin" />;
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(
+    !!sessionStorage.getItem("adminId")
+  );
+
+  // Handle admin login
+  const handleAdminLogin = (adminData) => {
+    sessionStorage.setItem("adminId", adminData._id);
+    sessionStorage.setItem("adminName", adminData.adminName);
+    setIsAdminAuthenticated(true);
+  };
+
+  const handleAdminLogout = () => {
+    sessionStorage.removeItem("adminId");
+    sessionStorage.removeItem("adminName");
+    setIsAdminAuthenticated(false);
+  };
+
+  const ProtectedAdminRoute = ({ children }) => {
+    return isAdminAuthenticated ? children : <Navigate to="/admin/login" />;
   };
 
 
@@ -48,12 +67,12 @@ function App() {
 
   const handleLogin = () => {
     setIsAuthenticated(true);
-    localStorage.setItem('isAuthenticated', 'true'); 
+    localStorage.setItem('isAuthenticated', 'true');
   };
 
   const handleLogout = () => {
     setIsAuthenticated(false);
-    localStorage.removeItem('isAuthenticated'); 
+    localStorage.removeItem('isAuthenticated');
   };
 
 
@@ -73,19 +92,22 @@ function App() {
           <Route path="/train-search" element={<TrainSearch />} />
           <Route path="/schedule/:trainNumber" element={<TrainSchedule />} />
           <Route path="/timetable" element={<Timetable />} />
+          <Route path="/user-timetable" element={<TimetableUser />} />
           <Route path="/passenger" element={<TrainPreview />} />
           <Route path="/confirmation" element={<Confirm />} />
           <Route path="/success" element={<Success />} />
           <Route path="/booking-history" element={<Bookings />} />
+
           <Route path="/admin/register" element={<AdminRegister />} />
-          <Route path="/admin" element={<AdminLogin />} />
-          <Route path="/admin/dashboard" element={<ProtectedRouteAdmin><Dashboard /></ProtectedRouteAdmin>} />
-          <Route path="/admin/add-train" element={<ProtectedRouteAdmin><AddTrain /></ProtectedRouteAdmin>} />
-          <Route path="/admin/update-train" element={<ProtectedRouteAdmin><UpdateTrain /></ProtectedRouteAdmin>} />
-          <Route path="/admin/delete-train" element={<ProtectedRouteAdmin><DeleteTrain /></ProtectedRouteAdmin>} />
-          <Route path="/admin/tte" element={<ProtectedRouteAdmin><TTE /></ProtectedRouteAdmin>} />
+          <Route path="/admin" element={<AdminLogin onLogin={handleAdminLogin} />} />
+          <Route path="/admin/dashboard" element={<ProtectedAdminRoute> <Dashboard onLogout={handleAdminLogout} /></ProtectedAdminRoute>}/>
+          <Route path="/admin/add-train" element={<ProtectedAdminRoute><AddTrain /></ProtectedAdminRoute>} />
+          <Route path="/admin/update-train" element={<ProtectedAdminRoute><UpdateTrain /></ProtectedAdminRoute>} />
+          <Route path="/admin/delete-train" element={<ProtectedAdminRoute><DeleteTrain /></ProtectedAdminRoute>} />
+          <Route path="/admin/tte" element={<ProtectedAdminRoute><TTE /></ProtectedAdminRoute>} />
+
           <Route path="/tte" element={<TTELogin onLogin={handleLogin} />} />
-          <Route path="/tte/view-tickets" element={<TTEprotect isAuthenticated={isAuthenticated}><Tickets onLogout={handleLogout}/></TTEprotect> }/>
+          <Route path="/tte/view-tickets" element={<TTEprotect isAuthenticated={isAuthenticated}><Tickets onLogout={handleLogout} /></TTEprotect>} />
         </Routes>
         <ToastContainer
           position="top-right"

@@ -3,6 +3,7 @@ import Navbar from '../Navbar/navbar';
 import "./pnrstatus.css";
 
 const PNRStatus = () => {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const [pnr, setPnr] = useState("");
   const [booking, setBooking] = useState(null);
   const [error, setError] = useState("");
@@ -26,7 +27,7 @@ const PNRStatus = () => {
     }
 
     try {
-      const response = await fetch(`https://railway-reservation.onrender.com/api/pnr-status/${pnr}`);
+      const response = await fetch(`${apiUrl}/api/pnr-status/${pnr}`);
       const data = await response.json();
 
       if (response.ok) {

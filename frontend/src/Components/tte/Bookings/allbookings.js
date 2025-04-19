@@ -4,6 +4,7 @@ import "react-day-picker/dist/style.css";
 import "./allbookings.css";
 
 const TrainBookings = () => {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const [trainNumber, setTrainNumber] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [isOpen, setIsOpen] = useState(false);
@@ -49,7 +50,7 @@ const TrainBookings = () => {
     try {
 
       const response = await fetch(
-        `https://railway-reservation.onrender.com/api/bookings/${trainNumber}?date=${formatDate(selectedDate)}`
+        `${apiUrl}/api/bookings/${trainNumber}?date=${formatDate(selectedDate)}`
       );
       const data = await response.json();
 

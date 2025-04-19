@@ -5,6 +5,7 @@ import Navbar from '../Nav/navbar';
 import '../trains.css'
 
 const DeleteTrain = () => {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const [searchTrainNumber, setSearchTrainNumber] = useState('');
   const [trainData, setTrainData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -17,7 +18,7 @@ const DeleteTrain = () => {
 
     setLoading(true);
     try {
-      const response = await fetch(`https://railway-reservation.onrender.com/train/${searchTrainNumber}`);
+      const response = await fetch(`${apiUrl}/train/${searchTrainNumber}`);
       const data = await response.json();
       if (response.ok) {
         setTrainData(data);
@@ -34,7 +35,7 @@ const DeleteTrain = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`https://railway-reservation.onrender.com/update-train/${trainData.trainNumber}`, {
+      const response = await fetch(`${apiUrl}/update-train/${trainData.trainNumber}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(trainData)
@@ -60,7 +61,7 @@ const DeleteTrain = () => {
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(`https://railway-reservation.onrender.com/delete-train/${trainData.trainNumber}`, {
+      const response = await fetch(`${apiUrl}/delete-train/${trainData.trainNumber}`, {
         method: 'DELETE',
       });
 

@@ -5,6 +5,7 @@ import { faEyeSlash, faEye, faCircleExclamation, faBars, faX } from '@fortawesom
 import { toast } from 'react-toastify';
 import '../admin.css';
 import Flag from '../Image/flag.png';
+import Loader from '../../User/loader/loader';
 
 const Signin = () => {
   const apiUrl = "https://railway-reservation.onrender.com";
@@ -15,6 +16,7 @@ const Signin = () => {
   });
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,8 +24,9 @@ const Signin = () => {
     setErrors({ ...errors, [name]: '' });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     let isValid = true;
     const newErrors = {};
 
@@ -38,46 +41,37 @@ const Signin = () => {
     }
 
     setErrors(newErrors);
+    if (!isValid) return;
 
-    if (isValid) {
-      fetch(apiUrl + "/login-admin", {
+    try {
+      setLoading(true);
+      const response = await fetch(apiUrl + "/login-admin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
-      })
-        .then(async (res) => {
-          if (!res.ok) {
-            throw new Error(`HTTP error! Status: ${res.status}`);
-          }
-          return res.json();
-        })
-        .then((data) => {
+      });
 
-          setErrors({});
-          toast.dismiss();
+      const data = await response.json();
 
-          if (!data || typeof data !== "object") {
-            toast.error("Unexpected server response format.");
-            return;
-          }
+      if (!response.ok) {
+        throw new Error(data.message || "Login failed");
+      }
 
-          if (data.message === "No admin found") {
-            toast.error("No admin found");
-          } else if (data.message === "Invalid credentials") {
-            toast.error("Invalid credentials");
-          } else if (data.admin && data.admin._id) {
-            toast.success("Login successful");
-            sessionStorage.setItem("userId", data.admin._id);
-            setFormData({ adminPhone: '', adminPassword: '' });
-            setTimeout(() => navigate('/admin/dashboard'), 100);
-          } else {
-            toast.error("Unexpected response. Admin data missing.");
-          }
-        })
-        .catch((error) => {
-          console.error("Login Error:", error);
-          toast.error("Network error, please try again.");
-        });
+      sessionStorage.setItem("adminId", data.admin._id);
+      sessionStorage.setItem("adminName", data.admin.adminName);
+      sessionStorage.setItem("adminPhone", data.admin.adminPhone);
+
+      setFormData({ adminPhone: '', adminPassword: '' });
+
+      toast.success("Login successful");
+
+      navigate('/admin/dashboard', { replace: true });
+
+    } catch (error) {
+      console.error("Login Error:", error);
+      toast.error(error.message || "Login failed. Please try again.");
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -101,6 +95,7 @@ const Signin = () => {
 
   return (
     <>
+      {loading && <Loader />}
       <nav className="navbar">
         <div className="navbar-logo">Train Booking</div>
         <div className="menu-icon" onClick={toggleMenu}>
@@ -149,7 +144,9 @@ const Signin = () => {
             {errors.adminPassword && <div className="error-message"><FontAwesomeIcon icon={faCircleExclamation} style={{ color: 'red' }} /> {errors.adminPassword}</div>}
           </div>
 
-          <button type="submit" className='button'>Login</button>
+          <button type="submit" className='button' disabled={loading}>
+            {loading ? 'Logging in...' : 'Login'}
+          </button>
           {/* <p style={{ textAlign: 'center' }}>Don't have an account? <Link to="/admin/register">Register</Link></p> */}
         </form>
       </div>

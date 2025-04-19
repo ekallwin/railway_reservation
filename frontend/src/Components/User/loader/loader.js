@@ -24,11 +24,11 @@ const Loader = () => {
 
 const StyledWrapper = styled.div`
   .spinner {
-    font-size: 28px;
+    font-size: 40px;
     position: relative;
     display: inline-block;
-    width: 1em;
-    height: 1em;
+    width: 50px;
+    height: 50px;
     z-index: 10000;
   }
 

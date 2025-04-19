@@ -12,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 const TrainBooking = () => {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -25,7 +26,7 @@ const TrainBooking = () => {
     const bookingData = JSON.parse(localStorage.getItem("bookingData"));
   
     if (storedUser && storedUser.phone) {
-      fetch("https://railway-reservation.onrender.com/get-user", {
+      fetch(`${apiUrl}/get-user`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone: storedUser.phone }),
@@ -53,7 +54,8 @@ const TrainBooking = () => {
     } else {
       navigate("/login");
     }
-  }, [navigate]);
+  }, [navigate, apiUrl]);
+
   
 
   const calendarRef = useRef(null);

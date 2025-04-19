@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-content">
-        <p>&copy; {new Date().getFullYear()} Train Booking. All Rights Reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Railway Reservation</p>
         <p className="footer-credit">
           Created, Developed, and Maintained by{" "}
           <a
