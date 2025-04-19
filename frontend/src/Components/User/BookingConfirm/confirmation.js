@@ -71,7 +71,7 @@ const Confirmation = () => {
 
 
         try {
-            const response = await fetch(`${apiUrl}book-ticket`, {
+            const response = await fetch(`${apiUrl}/book-ticket`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(bookingData),
