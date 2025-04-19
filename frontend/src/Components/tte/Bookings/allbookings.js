@@ -75,7 +75,8 @@ const TrainBookings = () => {
         <form onSubmit={handleSubmit}>
           <label>Train Number</label>
           <input
-            type="text"
+            type="number"
+            inputMode="numeric"
             className="input-box"
             value={trainNumber}
             onChange={(e) => setTrainNumber(e.target.value)}
