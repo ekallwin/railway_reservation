@@ -47,9 +47,7 @@ function Navbar() {
                     <li>
                         <Link to="/admin/dashboard" className="navbar-link">Home</Link>
                     </li>
-                    <li>
-                        <Link to="/admin/change-password" className="navbar-link">Change password</Link>
-                    </li>
+                    
                     <li>
                         <Link onClick={handleLogout} className="navbar-link logout-button">
                             Logout

@@ -21,7 +21,6 @@ import Success from './Components/User/success/showsuccess';
 import Bookings from './Components/User/BookingHistory/bookingHistory';
 
 import AdminLogin from './Components/admin/Credentials/login';
-import AdminPassword from './Components/admin/Credentials/ChangePassword';
 import Dashboard from './Components/admin/Dasboardmenu/dashboard';
 import AddTrain from './Components/admin/AddTrain/addtrain';
 import UpdateTrain from './Components/admin/UpdateTrain/updatetrain';
@@ -97,7 +96,6 @@ function App() {
           <Route path="/admin/update-train" element={<ProtectedAdminRoute><UpdateTrain /></ProtectedAdminRoute>} />
           <Route path="/admin/delete-train" element={<ProtectedAdminRoute><DeleteTrain /></ProtectedAdminRoute>} />
           <Route path="/admin/tte" element={<ProtectedAdminRoute><TTE /></ProtectedAdminRoute>} />
-          <Route path="/admin/change-password" element={<ProtectedAdminRoute><AdminPassword /></ProtectedAdminRoute>} />
 
           <Route path="/tte" element={<TTELogin onLogin={handleLogin} />} />
           <Route path="/tte/view-tickets" element={<TTEprotect isAuthenticated={isAuthenticated}><Tickets onLogout={handleLogout} /></TTEprotect>} />

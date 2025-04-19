@@ -206,32 +206,6 @@ app.post("/login-admin", async (req, res) => {
   }
 });
 
-app.post("/change-admin-password", async (req, res) => {
-  const { adminPhone, currentPassword, newPassword } = req.body;
-
-  if (!adminPhone || !currentPassword || !newPassword) {
-    return res.status(400).json({ message: "All fields are required" });
-  }
-
-  try {
-    const admin = await Admin.findOne({ adminPhone });
-
-    if (!admin) {
-      return res.status(404).json({ message: "Admin not found" });
-    }
-
-    if (admin.adminPassword !== currentPassword) {
-      return res.status(400).json({ message: "Current password is incorrect" });
-    }
-
-    admin.adminPassword = newPassword;
-    await admin.save();
-
-    res.status(200).json({ message: "Password updated successfully" });
-  } catch (error) {
-    res.status(500).json({ message: "Server error" });
-  }
-});
 
 const trainSchema = new mongoose.Schema({
   trainNumber: String,
