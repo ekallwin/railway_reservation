@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import './trainschedule.css';
 import { toast } from "react-toastify";
+import Navbar from "../Navbar/navbar";
 
 const TrainSchedule = () => {
   const apiUrl = process.env.REACT_APP_API_URL;
@@ -42,6 +43,8 @@ const TrainSchedule = () => {
   };
 
   return (
+    <>
+    <Navbar />
     <div className="container-table">
       <button onClick={() => navigate(-1)} className="back-button">Go Back</button>
       <h2>Train Schedule: {schedule?.trainName} ({schedule?.trainNumber})</h2>
@@ -94,6 +97,7 @@ const TrainSchedule = () => {
       <br />
 
     </div>
+    </>
   );
 };
 
