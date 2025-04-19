@@ -24,13 +24,9 @@ function Navbar() {
 
     const handleLogout = () => {
         localStorage.clear();
+        sessionStorage.clear();
         document.cookie.split(";").forEach((c) => {
             document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
-        });
-
-        window.history.pushState(null, "", window.location.href);
-        window.addEventListener("popstate", function () {
-            window.location.href = "/login";
         });
 
         navigate("/admin", { replace: true });
@@ -62,9 +58,7 @@ function Navbar() {
                     <li>
                         <Link to="/admin/delete-train" className="navbar-link">Delete Train</Link>
                     </li>
-                    <li>
-                        <Link to="/pnr" className="navbar-link">PNR Search</Link>
-                    </li>
+                    
                     <li>
                         <Link onClick={handleLogout} className="navbar-link logout-button">
                             Logout

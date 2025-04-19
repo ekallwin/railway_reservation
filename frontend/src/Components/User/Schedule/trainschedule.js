@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import './trainschedule.css';
+import { toast } from "react-toastify";
 
 const TrainSchedule = () => {
   const apiUrl = process.env.REACT_APP_API_URL;
@@ -9,6 +10,12 @@ const TrainSchedule = () => {
   const [schedule, setSchedule] = useState(null);
 
   useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (!storedUser || !storedUser.phone) {
+      toast.error("Unauthorized access");
+      navigate("/");
+      return;
+    }
     const fetchSchedule = async () => {
       try {
         const response = await fetch(`${apiUrl}/api/schedule/${trainNumber}`);
@@ -20,7 +27,7 @@ const TrainSchedule = () => {
     };
 
     fetchSchedule();
-  }, [trainNumber, apiUrl]);
+  }, [trainNumber, apiUrl, navigate]);
 
   if (!schedule) return <p className="loading">Loading schedule...</p>;
 

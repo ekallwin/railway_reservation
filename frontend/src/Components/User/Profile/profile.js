@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import '../user.css';
 import Flag from '../Image/flag.png'
 import Navbar from '../Navbar/navbar';
+import { toast } from "react-toastify";
 const Profile = () => {
     const apiUrl = process.env.REACT_APP_API_URL;
     const navigate = useNavigate();
@@ -24,7 +25,8 @@ const Profile = () => {
                         setUser(data.user);
                         localStorage.setItem("user", JSON.stringify(data.user));
                     } else {
-                        navigate("/login");
+                        toast.error("Unauthorized access");
+                        navigate("/");
                     }
                 })
                 .catch((error) => {
@@ -32,7 +34,8 @@ const Profile = () => {
                     navigate("/login");
                 });
         } else {
-            navigate("/login");
+            toast.error("Unauthorized access");
+            navigate("/");
         }
     }, [navigate, apiUrl]);
 

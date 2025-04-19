@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import '../user.css';
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -64,7 +64,13 @@ const Password = () => {
         toast.error("Server error, please try again.");
       });
   };
-
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (!storedUser || !storedUser.phone) {
+      toast.error("Unauthorized access");
+      navigate("/");
+    }
+  }, [navigate]);
 
   return (
     <>

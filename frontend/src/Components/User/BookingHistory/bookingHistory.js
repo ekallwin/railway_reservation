@@ -8,9 +8,11 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Print from '../printTemplate';
 import html2pdf from "html2pdf.js";
+import { useNavigate } from "react-router-dom";
 
 const BookingHistory = () => {
     const apiUrl = process.env.REACT_APP_API_URL;
+    const navigate = useNavigate();
     const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
@@ -23,7 +25,8 @@ const BookingHistory = () => {
         const userPhone = storedUser?.phone;
 
         if (!userPhone) {
-            setError("User not logged in");
+            navigate("/")
+            toast.error("Unauthorized access");
             setLoading(false);
             return;
         }
@@ -45,7 +48,7 @@ const BookingHistory = () => {
         } finally {
             setLoading(false);
         }
-    }, [apiUrl]); 
+    }, [apiUrl, navigate]);
 
 
     const updateBookingStatus = useCallback(() => {

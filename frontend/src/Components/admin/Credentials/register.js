@@ -1,16 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash, faCircleExclamation, faX, faBars } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEyeSlash, faCircleExclamation, faX } from "@fortawesome/free-solid-svg-icons";
 import Flag from '../Image/flag.png';
 import '../admin.css';
 import { toast } from 'react-toastify';
 import Loader from '../../User/loader/loader';
 
-const Signup = () => {
-  const apiurl = "https://railway-reservation.onrender.com";
-  const navigate = useNavigate();
-
+const AddAdminModal = ({ show, onClose }) => {
+  const apiurl = process.env.REACT_APP_API_URL;
   const [formData, setFormData] = useState({
     adminName: "",
     adminPhone: "",
@@ -78,7 +75,7 @@ const Signup = () => {
           if (res.status === 201) {
             toast.success(data.message);
             setFormData({ adminName: "", adminPhone: "", adminEmail: "", adminPassword: "" });
-            setTimeout(() => navigate("/login"), 1500);
+            onClose();
           } else {
             toast.error(data.message);
           }
@@ -88,48 +85,21 @@ const Signup = () => {
     }
   };
 
-  const [isOpen, setIsOpen] = useState(false);
-  const toggleMenu = () => {
-    setIsOpen((prevIsOpen) => !prevIsOpen);
-  };
-
-  useEffect(() => {
-    const closeMenu = (e) => {
-      if (isOpen && !e.target.closest(".navbar")) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener("click", closeMenu);
-    return () => {
-      document.removeEventListener("click", closeMenu);
-    };
-  }, [isOpen]);
+  if (!show) return null;
 
   return (
-    <>
-      {loading && <Loader />}
-      <nav className="navbar">
-        <div className="navbar-logo">Train Booking</div>
-        <div className="menu-icon" onClick={toggleMenu}>
-          {isOpen ? (
-            <FontAwesomeIcon icon={faX} className="menu-icon-close" size="2xl" />
-          ) : (
-            <FontAwesomeIcon icon={faBars} className="menu-icon-bars" size="2xl" />
-          )}
+    <div className="modal-overlay">
+      <div className="modal-container">
+        <div className="modal-header">
+          <h2>Register New Admin</h2>
+          <button className="modal-close-btn" onClick={onClose}>
+            <FontAwesomeIcon icon={faX} />
+          </button>
         </div>
-        <ul className={`navbar-links ${isOpen ? "open" : ""}`}>
-          <li>
-            <Link to="/" className="navbar-link">Home</Link>
-          </li>
 
-        </ul>
-      </nav>
+        {loading && <Loader />}
 
-      <div className="container">
-        <form onSubmit={handleSubmit}>
-          <h2>Register</h2>
-
+        <form onSubmit={handleSubmit} className="modal-form">
           <div className="input-container">
             <input type="text" name="adminName" value={formData.adminName} onChange={handleChange} placeholder=" " />
             <label>Name</label>
@@ -168,13 +138,18 @@ const Signup = () => {
             />
           </div>
 
-          <button type="submit" className='button'>Sign Up</button>
-          <p style={{ textAlign: 'center' }}>Already have an account? <Link to="/admin">Login</Link></p>
+          <div className="modal-footer">
+            <button type="button" className="modal-cancel-btn" onClick={onClose}>
+              Cancel
+            </button>
+            <button type="submit" className="modal-submit-btn" disabled={loading}>
+              {loading ? 'Registering...' : 'Register'}
+            </button>
+          </div>
         </form>
       </div>
-    </>
-
+    </div>
   );
 };
 
-export default Signup;
+export default AddAdminModal;

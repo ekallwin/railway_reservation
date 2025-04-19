@@ -8,7 +8,7 @@ import Flag from '../Image/flag.png';
 import Loader from '../../User/loader/loader';
 
 const Signin = () => {
-  const apiUrl = "https://railway-reservation.onrender.com";
+  const apiurl = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     adminPhone: '',
@@ -45,7 +45,7 @@ const Signin = () => {
 
     try {
       setLoading(true);
-      const response = await fetch(apiUrl + "/login-admin", {
+      const response = await fetch(apiurl + "/login-admin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

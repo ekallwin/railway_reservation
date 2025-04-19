@@ -4,6 +4,7 @@ import Navbar from "../Navbar/navbar";
 import { useEffect } from "react";
 import Print from '../printTemplate';
 import html2pdf from "html2pdf.js";
+import { toast } from "react-toastify";
 const Success = () => {
 
     const location = useLocation();
@@ -11,6 +12,12 @@ const Success = () => {
 
 
     useEffect(() => {
+        const storedUser = JSON.parse(localStorage.getItem("user"));
+        if (!storedUser || !storedUser.phone) {
+            toast.error("Unauthorized access");
+            navigate("/");
+            return;
+        }
         setTimeout(() => {
             document.documentElement.scrollTop = 0;
             document.body.scrollTop = 0;
@@ -52,7 +59,7 @@ const Success = () => {
     } = location.state || {};
 
     if (!pnrNumber) {
-        return <h2 className="error-message">No Booking Details Available</h2>;
+        return navigate("/login");
     }
 
     const printTicket = (booking) => {

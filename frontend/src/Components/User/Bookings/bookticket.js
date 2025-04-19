@@ -24,7 +24,7 @@ const TrainBooking = () => {
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const bookingData = JSON.parse(localStorage.getItem("bookingData"));
-  
+
     if (storedUser && storedUser.phone) {
       fetch(`${apiUrl}/get-user`, {
         method: "POST",
@@ -39,7 +39,7 @@ const TrainBooking = () => {
           } else {
             navigate("/login");
           }
-  
+
           if (bookingData) {
             setFrom(bookingData.from);
             setTo(bookingData.to);
@@ -51,12 +51,14 @@ const TrainBooking = () => {
           console.error("Error fetching user:", error);
           navigate("/login");
         });
-    } else {
+    }
+    else {
+      toast.error("Unauthorized");
       navigate("/login");
     }
   }, [navigate, apiUrl]);
 
-  
+
 
   const calendarRef = useRef(null);
 

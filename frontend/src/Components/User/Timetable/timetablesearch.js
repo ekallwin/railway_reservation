@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import Navbar from '../Navbar/navbar';
 import "./timetablesearch.css";
 const TimetableSearch = () => {
@@ -9,8 +11,15 @@ const TimetableSearch = () => {
   const [schedule, setSchedule] = useState(null);
   const [error, setError] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (!storedUser || !storedUser.phone) {
+      toast.error("Unauthorized access");
+      navigate("/");
+      return;
+    }
     const fetchTrains = async () => {
       try {
         const response = await fetch(`${apiUrl}/search-trains`);
@@ -29,7 +38,7 @@ const TimetableSearch = () => {
     };
 
     fetchTrains();
-  }, [apiUrl]);
+  }, [apiUrl, navigate]);
 
   const handleInputChange = (e) => {
     const value = e.target.value;

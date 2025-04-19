@@ -3,9 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faX } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import "./pnrstatus.css";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const PNRStatus = () => {
   const apiUrl = process.env.REACT_APP_API_URL;
+  const navigate = useNavigate();
   const [pnr, setPnr] = useState("");
   const [booking, setBooking] = useState(null);
   const [error, setError] = useState("");
@@ -16,6 +19,12 @@ const PNRStatus = () => {
   };
 
   useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (!storedUser || !storedUser.phone) {
+      toast.error("Unauthorized access");
+      navigate("/");
+      return;
+    }
     const closeMenu = (e) => {
       if (isOpen && !e.target.closest(".navbar")) {
         setIsOpen(false);
@@ -26,7 +35,7 @@ const PNRStatus = () => {
     return () => {
       document.removeEventListener("click", closeMenu);
     };
-  }, [isOpen]);
+  }, [isOpen, navigate]);
 
   const handleInputChange = (e) => {
     const value = e.target.value;

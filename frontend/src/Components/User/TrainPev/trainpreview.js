@@ -2,14 +2,22 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./trainpreview.css";
 import Navbar from "../Navbar/navbar";
+import { toast } from "react-toastify";
 
 const TrainPreview = () => {
+    const navigate = useNavigate();
     useEffect(() => {
+        const storedUser = JSON.parse(localStorage.getItem("user"));
+        if (!storedUser || !storedUser.phone) {
+            toast.error("Unauthorized access");
+            navigate("/");
+            return;
+        }
         setTimeout(() => {
             document.documentElement.scrollTop = 0;
             document.body.scrollTop = 0;
         }, 100);
-    }, []);
+    }, [navigate]);
 
     const location = useLocation();
     const { train, selectedClass, availableSeats, from, to, date, quota, departure, arrival, formattedArrivalDate, duration, price } = location.state || {};
@@ -17,7 +25,7 @@ const TrainPreview = () => {
     const [passengers, setPassengers] = useState([{ name: "", age: "", gender: "", nationality: "India" }]);
     const [infants, setInfants] = useState([]);
     const [errors, setErrors] = useState([]);
-    const navigate = useNavigate();
+   
 
     const handleChange = (index, e) => {
         const { name, value } = e.target;
@@ -129,10 +137,7 @@ const TrainPreview = () => {
 
 
     if (!train) {
-        return <div>
-            <h2 className="error-message-trn">No Train Selected</h2>
-            <button className="error-message-trn-btn" onClick={() => navigate("/booking")}>Go back</button>
-        </div>;
+        return toast.error("Unauthorized access") && navigate("/");
     }
 
     return (

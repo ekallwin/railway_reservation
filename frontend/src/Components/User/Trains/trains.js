@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "react-day-picker/dist/style.css";
 import './trains.css';
 import moment from 'moment-timezone';
+import { toast } from "react-toastify";
 
 const TrainBooking = () => {
   const apiUrl = process.env.REACT_APP_API_URL;
@@ -29,17 +30,17 @@ const TrainBooking = () => {
             setUser(data.user);
             localStorage.setItem("user", JSON.stringify(data.user));
           } else {
-            navigate("/login");
+            toast.error("Unauthorized access");
+            navigate("/");
           }
         })
         .catch(() => navigate("/login"));
-    } else {
-      navigate("/login");
     }
   }, [navigate, apiUrl]);
 
   useEffect(() => {
     if (!from || !to) {
+      toast.error("Unauthorized access");
       navigate("/");
       return;
     }

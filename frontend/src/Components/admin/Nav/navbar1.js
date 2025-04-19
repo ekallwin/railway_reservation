@@ -23,18 +23,15 @@ function Navbar() {
     }, [isOpen]);
     const handleLogout = () => {
         localStorage.clear();
+        sessionStorage.clear();
         document.cookie.split(";").forEach((c) => {
             document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
-        });
-
-        window.history.pushState(null, "", window.location.href);
-        window.addEventListener("popstate", function () {
-            window.location.href = "/login";
         });
 
         navigate("/admin", { replace: true });
         window.location.reload();
     };
+
     return (
         <>
             <nav className="navbar">
@@ -50,9 +47,9 @@ function Navbar() {
                     <li>
                         <Link to="/admin/dashboard" className="navbar-link">Home</Link>
                     </li>
-                    {/* <li>
-                        <Link to="/admin/profile" className="navbar-link">Profile</Link>
-                    </li> */}
+                    <li>
+                        <Link to="/admin/change-password" className="navbar-link">Change password</Link>
+                    </li>
                     <li>
                         <Link onClick={handleLogout} className="navbar-link logout-button">
                             Logout

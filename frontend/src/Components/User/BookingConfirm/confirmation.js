@@ -3,21 +3,30 @@ import { useState, useEffect } from "react";
 import Navbar from "../Navbar/navbar";
 import './confirmation.css';
 import FareBreakdown from "../Farepopup/farebreakdown";
+import { toast } from "react-toastify";
+
 const Confirmation = () => {
     const apiUrl = process.env.REACT_APP_API_URL;
+    const navigate = useNavigate();
+    const location = useLocation();
     useEffect(() => {
+        const storedUser = JSON.parse(localStorage.getItem("user"));
+        if (!storedUser || !storedUser.phone) {
+            toast.error("Unauthorized access");
+            navigate("/");
+            return;
+        }
         setTimeout(() => {
             document.documentElement.scrollTop = 0;
             document.body.scrollTop = 0;
         }, 100);
-    }, []);
+    }, [navigate]);
 
-    const navigate = useNavigate();
-    const location = useLocation();
+
     const [isFareBreakdownOpen, setFareBreakdownOpen] = useState(false);
     const { train, selectedClass, from, to, date, quota, departure, arrival, formattedArrivalDate, duration, passengers, price } = location.state || {};
     if (!train) {
-        return <h2 className="error-message-trn">No Train Selected</h2>;
+        return navigate("/login");
     }
 
 
