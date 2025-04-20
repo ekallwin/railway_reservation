@@ -81,15 +81,15 @@ const getPrintHtml = (booking) => `
             <table style="width: 30%; border-collapse: collapse; margin-top: 10px;">
                 <thead>
                     <tr>
-                        <th style="text-align: left; padding: 8px; padding-right: 120px">Passenger</th>
-                        <th style="text-align: left; padding: 8px; padding-right: 120px">Berth</th>
+                        <th style="text-align: left; padding: 8px;">Passenger</th>
+                        <th style="text-align: left; padding: 8px;">Berth</th>
                     </tr>
                 </thead>
                 <tbody>
                     ${booking.passengers.map((p, i) => `
                     <tr>
-                        <td style="padding: 8px; padding-right: 120px">${i + 1}. ${p.name} ${p.age}${p.gender}</td>
-                        <td style="padding: 8px; padding-right: 120px">${p.seatNumber}</td>
+                        <td style="padding: 8px;">${i + 1}. ${p.name} ${p.age}${p.gender}</td>
+                        <td style="padding: 8px;">${p.seatNumber}</td>
                     </tr>
                     `).join('')}
                 </tbody>
