@@ -78,11 +78,11 @@ const getPrintHtml = (booking) => `
         </div>
         <div class="passenger-list">
             <h3 style="text-align: left;">Passenger Details</h3>
-            <table style="width: 30%; border-collapse: collapse; margin-top: 10px;">
+            <table style="width: 90%; border-collapse: collapse; margin-top: 10px;">
                 <thead>
                     <tr>
-                        <th style="text-align: left; padding: 8px;">Passenger</th>
-                        <th style="text-align: left; padding: 8px;">Berth</th>
+                        <th style="text-align: left; padding: 8px; width: 200px">Passenger</th>
+                        <th style="text-align: left; padding: 8px; width: 250px">Berth</th>
                     </tr>
                 </thead>
                 <tbody>
