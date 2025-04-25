@@ -113,6 +113,7 @@ const TrainBooking = () => {
       from,
       to,
       quota,
+      selectedDate,
     }));
     navigate("/train-search", {
       state: { from, to, date: formatDate(selectedDate), quota }
