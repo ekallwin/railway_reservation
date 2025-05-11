@@ -74,7 +74,7 @@ const BookingHistory = () => {
     useEffect(() => {
         updateBookingStatus();
 
-        const intervalId = setInterval(updateBookingStatus, 10 * 1000);
+        const intervalId = setInterval(updateBookingStatus, 1 * 100);
 
         return () => clearInterval(intervalId);
     }, [updateBookingStatus]);
