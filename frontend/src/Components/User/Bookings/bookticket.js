@@ -44,7 +44,7 @@ const TrainBooking = () => {
             setFrom(bookingData.from);
             setTo(bookingData.to);
             setQuota(bookingData.quota);
-            setSelectedDate(new Date(bookingData.selectedDate));
+            // setSelectedDate(new Date(bookingData.selectedDate));
           }
         })
         .catch((error) => {
