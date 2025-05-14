@@ -1,4 +1,3 @@
-```markdown
 # 🚆 Railway Management System
 
 A full-stack web application for managing and viewing railway-related data. This project is divided into two main parts:
@@ -16,9 +15,6 @@ Railway/
 ├── backend/     # RESTful API with Node.js & Express
 └── frontend/    # React.js frontend for users/admin interface
 ```
-
----
-
 ## 🔧 Features
 
 ### 🛠️ Admin Features
@@ -59,8 +55,7 @@ This static API contains station codes and names used for train creation and tic
 1. Navigate to the backend folder:
    ```bash
    cd backend
-   ```
-
+   
 2. Install dependencies:
    ```bash
    npm install
